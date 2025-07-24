@@ -1,0 +1,16 @@
+[package]
+name = "latdder"
+version = "0.1.0"
+edition = "2024"
+
+[lib]
+name = "ladder"
+path = "ladder/lib.rs"
+
+[[test]]
+name = "init_level_01"
+path = "tests/init/level_01.rs"
+
+[[test]]
+name = "toast_level_01"
+path = "tests/toast/level_01.rs"
