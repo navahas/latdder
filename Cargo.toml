@@ -14,3 +14,7 @@ path = "tests/init/level_01.rs"
 [[test]]
 name = "toast_level_01"
 path = "tests/toast/level_01.rs"
+
+[[test]]
+name = "toast_level_02"
+path = "tests/toast/level_02.rs"

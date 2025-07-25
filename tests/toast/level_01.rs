@@ -14,7 +14,7 @@ mod toast_level_01 {
     // This should not compile, so it's commented out as a teaching tool:
     // #[test]
     // fn invalid_toast_without_plugin() {
-    //     let _ = Toaster::<Unplugged>::new().toast(); // ❌ should not compile
+    //     let _ = Toaster::<Unplugged>::new().toast(); // should not compile
     // }
 
     #[test]
