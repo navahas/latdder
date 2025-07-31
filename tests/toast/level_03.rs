@@ -9,7 +9,7 @@ mod toast_level_03 {
         let _ = Toaster::<Unplugged, NoBread>::new()
             .plug_in()
             .insert_bread()
-            .set_timer(10)
+            .set_timer(1)
             .toast();
     }
 

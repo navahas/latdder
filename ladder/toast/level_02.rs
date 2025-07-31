@@ -1,4 +1,4 @@
-// ## Level 2 – Insert Bread
+// Level 2 – Insert Bread
 //
 // In this level, toasting is only allowed **after both:**
 // - The toaster is plugged in
