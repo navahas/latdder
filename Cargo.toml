@@ -22,3 +22,7 @@ path = "tests/toast/level_02.rs"
 [[test]]
 name = "toast_level_03"
 path = "tests/toast/level_03.rs"
+
+[[test]]
+name = "toast_level_04"
+path = "tests/toast/level_04.rs"
