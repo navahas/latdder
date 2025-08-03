@@ -1,75 +1,118 @@
 use std::{marker::PhantomData, thread, time::Duration};
 
-
-#[derive(Debug)]
 pub struct PluggedIn;
-#[derive(Debug)]
 pub struct Unplugged;
-
-#[derive(Debug)]
 pub struct BreadIn;
-#[derive(Debug)]
 pub struct NoBread;
-#[derive(Debug)]
 pub struct Toasted;
-#[derive(Debug)]
 pub struct Ejected;
-
-#[derive(Debug)]
 pub struct NoTimer;
-#[derive(Debug)]
-pub struct TimerSet {
-    _seconds: u8
+pub struct TimerSet;
+
+// Event enum for runtime actions
+pub enum Event {
+    PlugIn,
+    InsertBread,
+    SetTimer(u8),
+    Toast,
+    Eject,
 }
 
-#[derive(Debug)]
-pub struct Toaster<Power, Bread, Timer>(PhantomData<(Power, Bread, Timer)>);
+pub struct Toaster<Power, Bread, Timer> {
+    seconds: Option<u8>,
+    _power: PhantomData<Power>,
+    _bread: PhantomData<Bread>,
+    _timer: PhantomData<Timer>,
+}
 
 impl Toaster<Unplugged, NoBread, NoTimer> {
     pub fn new() -> Self {
-        Toaster(PhantomData)
+        Self {
+            seconds: None,
+            _power: PhantomData,
+            _bread: PhantomData,
+            _timer: PhantomData,
+        }
+    }
+
+    pub fn handle_event(self, event: Event) -> Result<Toaster<PluggedIn, NoBread, NoTimer>, &'static str> {
+        match event {
+            Event::PlugIn => Ok(Toaster {
+                seconds: self.seconds,
+                _power: PhantomData,
+                _bread: PhantomData,
+                _timer: PhantomData,
+            }),
+            _ => Err("Invalid event for current state"),
+        }
     }
 }
 
 impl<Bread> Toaster<Unplugged, Bread, NoTimer> {
     pub fn plug_in(self) -> Toaster<PluggedIn, Bread, NoTimer> {
-        Toaster(PhantomData)
+        Toaster {
+            seconds: self.seconds,
+            _power: PhantomData,
+            _bread: PhantomData,
+            _timer: PhantomData,
+        }
     }
 }
 
 impl<Power> Toaster<Power, NoBread, NoTimer> {
     pub fn insert_bread(self) -> Toaster<Power, BreadIn, NoTimer> {
-        Toaster(PhantomData)
+        Toaster {
+            seconds: self.seconds,
+            _power: PhantomData,
+            _bread: PhantomData,
+            _timer: PhantomData,
+        }
     }
 }
 
 impl Toaster<PluggedIn, BreadIn, NoTimer> {
     pub fn set_timer(self, seconds: u8) -> Toaster<PluggedIn, BreadIn, TimerSet> {
-        thread::sleep(Duration::from_secs(seconds as u64));
-        Toaster(PhantomData)
+        Toaster {
+            seconds: Some(seconds),
+            _power: PhantomData,
+            _bread: PhantomData,
+            _timer: PhantomData,
+        }
     }
 }
 
 impl Toaster<PluggedIn, BreadIn, TimerSet> {
     pub fn toast(self) -> Toaster<PluggedIn, Toasted, TimerSet> {
-        Toaster(PhantomData)
+        if let Some(secs) = self.seconds {
+            thread::sleep(Duration::from_secs(secs as u64));
+        }
+        Toaster {
+            seconds: self.seconds,
+            _power: PhantomData,
+            _bread: PhantomData,
+            _timer: PhantomData,
+        }
     }
 }
 
 impl Toaster<PluggedIn, Toasted, TimerSet> {
-    pub fn eject(self) -> Toaster<PluggedIn, Ejected, TimerSet> {
-        Toaster(PhantomData)
+    pub fn eject(self) -> Toaster<PluggedIn, Ejected, NoTimer> {
+        Toaster {
+            seconds: None,
+            _power: PhantomData,
+            _bread: PhantomData,
+            _timer: PhantomData,
+        }
     }
 }
 
 fn main() {
-
-    let toaster = Toaster::new()
-        .plug_in()
+    let _ = Toaster::new()
+        .handle_event(Event::PlugIn).unwrap()
         .insert_bread()
         .set_timer(1)
         .toast()
         .eject();
 
-    println!("{:?}", toaster);
+    println!("Toaster is ready!");
 }
