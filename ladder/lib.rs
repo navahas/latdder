@@ -35,10 +35,7 @@ pub mod toast {
         ))]
         pub mod level_03;
 
-        #[cfg(all(
-            feature = "toast_level_04",
-            not(feature = "toast_level_05"),
-        ))]
+        #[cfg(all(feature = "toast_level_04", not(feature = "toast_level_05")))]
         pub mod level_04;
 
         #[cfg(feature = "toast_level_05")]

@@ -6,9 +6,7 @@ mod toast_level_01 {
 
     #[test]
     fn valid_toast_sequence() {
-        let _ = Toaster::<Unplugged>::new()
-            .plug_in()
-            .toast();
+        let _ = Toaster::<Unplugged>::new().plug_in().toast();
     }
 
     // This should not compile, so it's commented out as a teaching tool:

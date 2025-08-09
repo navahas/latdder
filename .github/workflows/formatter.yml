@@ -1,4 +1,4 @@
-name: Formatter
+name: Formatter Verification
 
 on:
   push:
