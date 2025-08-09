@@ -1,0 +1,17 @@
+name: Formatter
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  rustfmt:
+    name: Rustfmt check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          components: rustfmt
+      - name: Check formatting
+        run: cargo fmt --all -- --check
