@@ -7,22 +7,11 @@ edition = "2024"
 name = "ladder"
 path = "ladder/lib.rs"
 
-[[test]]
-name = "init_level_01"
-path = "tests/init/level_01.rs"
+[features]
+init_level_01 = []
 
-[[test]]
-name = "toast_level_01"
-path = "tests/toast/level_01.rs"
-
-[[test]]
-name = "toast_level_02"
-path = "tests/toast/level_02.rs"
-
-[[test]]
-name = "toast_level_03"
-path = "tests/toast/level_03.rs"
-
-[[test]]
-name = "toast_level_04"
-path = "tests/toast/level_04.rs"
+toast_level_01 = []
+toast_level_02 = ["toast_level_01"]
+toast_level_03 = ["toast_level_02"]
+toast_level_04 = ["toast_level_03"]
+toast_level_05 = ["toast_level_04"]

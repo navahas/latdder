@@ -1,4 +1,4 @@
-use ladder::toast::level_01::*;
+use ladder::toast::{api::*, levels::level_01};
 
 #[cfg(test)]
 mod toast_level_01 {
@@ -25,5 +25,10 @@ mod toast_level_01 {
     #[test]
     fn can_plug_in_toaster() {
         let _plugged = Toaster::<Unplugged>::new().plug_in();
+    }
+
+    #[test]
+    fn level_01_completed() {
+        level_01::target();
     }
 }

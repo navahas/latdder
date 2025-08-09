@@ -1,4 +1,4 @@
-use ladder::toast::level_02::*;
+use ladder::toast::{api::*, levels::level_02};
 
 #[cfg(test)]
 mod toast_level_02 {
@@ -10,6 +10,11 @@ mod toast_level_02 {
             .plug_in()
             .insert_bread()
             .toast();
+    }
+
+    #[test]
+    fn level_02_completed() {
+        level_02::target();
     }
 
     // Uncommenting this will fail to compile as expected:
