@@ -4,6 +4,8 @@
 </p>
 
 # Latdder: Learn Type-Driven API Design in Rust
+> [!NOTE]
+> This project is currently under construction and is not yet ready for public use. It will be shared publicly in the near future once the initial stages are complete, at which point contributions will be welcomed.
 
 Latdder offers a progressive, test-driven approach to mastering type-driven API design in Rust, with a focus on the powerful **type-state pattern**.
 
@@ -49,3 +51,4 @@ cargo test --test init_level_01
     └── theme
         └── level_01.rs
 ```
+
