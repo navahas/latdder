@@ -1,4 +1,7 @@
-![latter_logo](https://raw.githubusercontent.com/navahas/latdder/assets/images/latdder.png)
+<p align="center">
+    <img src="https://raw.githubusercontent.com/navahas/latdder/assets/images/latdder.png"
+        alt="latter_logo" width="200"/>
+</p>
 
 # Latdder: Learn Type-Driven API Design in Rust
 
