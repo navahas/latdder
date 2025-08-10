@@ -1,3 +1,5 @@
+![latter_logo](https://raw.githubusercontent.com/navahas/latdder/assets/images/latdder.png)
+
 # Latdder: Learn Type-Driven API Design in Rust
 
 Latdder offers a progressive, test-driven approach to mastering type-driven API design in Rust, with a focus on the powerful **type-state pattern**.
