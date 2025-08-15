@@ -1,14 +1,23 @@
-// Level 3 – Timer Setting with Trait Capability
+//! # Toast — Level 03: Trait-Gated Timer
+//! GOAL: Add timer setting that only works when plugged in using trait capability gating.
+//!
+//! ## ✅ Works
+//! ```rust
+//! use ladder::toast::api::*;
+//! let _ = Toaster::<Unplugged, NoBread>::new()
+//!     .plug_in()
+//!     .insert_bread()
+//!     .set_timer(10)
+//!     .toast();
+//! ```
+//!
+//! ## ❌ Fails to compile
+//! ```compile_fail
+//! use ladder::toast::api::*;
+//! let _ = Toaster::<Unplugged, NoBread>::new()
+//!     .set_timer(10); // Cannot set timer while unplugged
+//! ```
+
+// #[cfg_attr(docsrs, doc(cfg(feature = "toast_level_03")))]
 //
-// Add a `.set_timer()` method that is **only available once the toaster is plugged in**.
-// This uses traits (`CanSetTimer`) to gate functionality by type.
-//
-// - `.set_timer()` should not compile if toaster is unplugged
-// - `.toast()` still requires bread to be inserted
-//
-// Teaches: trait-based capability gating + type-state coordination
-// let _ = Toaster::<Unplugged, NoBread>::new()
-//     .plug_in()
-//     .insert_bread()
-//     .set_timer(10)
-//     .toast();
+#![cfg(feature = "toast_level_03")]
