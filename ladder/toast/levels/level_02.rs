@@ -21,7 +21,6 @@
 //!     .toast(); // bread not inserted
 //! ```
 #[cfg_attr(docsrs, doc(cfg(feature = "toast_level_02")))]
-
 use crate::toast::api::*;
 
 pub fn target() {

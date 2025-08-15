@@ -1,4 +1,3 @@
-#![cfg_attr(docsrs, feature(doc_cfg))]
 pub mod init {
     pub mod api;
     pub mod levels {
@@ -9,39 +8,51 @@ pub mod init {
 pub mod toast {
     pub mod api;
     pub mod levels {
-        #[cfg(all(
-            feature = "toast_level_01",
-            not(feature = "toast_level_02"),
-            not(feature = "toast_level_03"),
-            not(feature = "toast_level_04"),
-            not(feature = "toast_level_05"),
-        ))]
-        #[cfg_attr(docsrs, doc(cfg(feature = "toast_level_01")))]
+        // Level 1 — visible in docs, gated in code
+        #[cfg_attr(
+            not(doc),
+            cfg(all(
+                feature = "toast_level_01",
+                not(feature = "toast_level_02"),
+                not(feature = "toast_level_03"),
+                not(feature = "toast_level_04"),
+                not(feature = "toast_level_05"),
+            ))
+        )]
         pub mod level_01;
 
-        #[cfg(all(
-            feature = "toast_level_02",
-            not(feature = "toast_level_03"),
-            not(feature = "toast_level_04"),
-            not(feature = "toast_level_05"),
-        ))]
-        #[cfg_attr(docsrs, doc(cfg(feature = "toast_level_02")))]
+        // Level 2
+        #[cfg_attr(
+            not(doc),
+            cfg(all(
+                feature = "toast_level_02",
+                not(feature = "toast_level_03"),
+                not(feature = "toast_level_04"),
+                not(feature = "toast_level_05"),
+            ))
+        )]
         pub mod level_02;
 
-        #[cfg(all(
-            feature = "toast_level_03",
-            not(feature = "toast_level_04"),
-            not(feature = "toast_level_05"),
-        ))]
-        #[cfg_attr(docsrs, doc(cfg(feature = "toast_level_03")))]
+        // Level 3
+        #[cfg_attr(
+            not(doc),
+            cfg(all(
+                feature = "toast_level_03",
+                not(feature = "toast_level_04"),
+                not(feature = "toast_level_05"),
+            ))
+        )]
         pub mod level_03;
 
-        #[cfg(all(feature = "toast_level_04", not(feature = "toast_level_05")))]
-        #[cfg_attr(docsrs, doc(cfg(feature = "toast_level_04")))]
+        // Level 4
+        #[cfg_attr(
+            not(doc),
+            cfg(all(feature = "toast_level_04", not(feature = "toast_level_05")))
+        )]
         pub mod level_04;
 
-        #[cfg(feature = "toast_level_05")]
-        #[cfg_attr(docsrs, doc(cfg(feature = "toast_level_05")))]
+        // Level 5
+        #[cfg_attr(not(doc), cfg(feature = "toast_level_05"))]
         pub mod level_05;
     }
 }
