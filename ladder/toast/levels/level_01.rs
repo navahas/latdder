@@ -1,15 +1,25 @@
+//! # Toast — Level 01: Basic Typestate
+//! GOAL: Prevent toasting when unplugged using compile-time state tracking.
+//!
+//! ## ✅ Works
+//! ```rust
+//! use ladder::toast::api::*;
+//! let _ = Toaster::<Unplugged, NoBread>::new()
+//!     .plug_in()
+//!     .toast();
+//! ```
+//!
+//! ## ❌ Fails to compile
+//! ```compile_fail
+//! use ladder::toast::api::*;
+//! let _ = Toaster::<Unplugged, NoBread>::new()
+//!     .toast(); // Cannot toast while unplugged
+//! ```
+
+#[cfg_attr(docsrs, doc(cfg(feature = "toast_level_01")))]
+
 use crate::toast::api::*;
-// TODO: Implement a type-safe toaster using phantom types
-//
-// Requirements:
-// - Create a Toaster<State> that prevents invalid operations
-// - Implement PluggedIn and Unplugged states
-// - new() creates Unplugged toaster
-// - plug_in() transitions from Unplugged to PluggedIn
-// - toast() only works on PluggedIn toaster
-//
-// Your implementation here:
 
 pub fn target() {
-    let _ = Toaster::<Unplugged>::new().plug_in().toast();
+    let _ = Toaster::<Unplugged, NoBread>::new().plug_in().toast();
 }
