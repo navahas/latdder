@@ -1,4 +1,4 @@
-use ladder::init::{api::*, levels::level_01};
+use ladder::init::levels::level_01;
 
 #[test]
 fn latdder_ready() {

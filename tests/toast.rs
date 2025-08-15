@@ -10,7 +10,7 @@ mod level_01;
 
 #[cfg(all(
     feature = "toast_level_02",
-    not(feature = "toast_level_3"),
+    not(feature = "toast_level_03"),
     not(feature = "toast_level_04"),
     not(feature = "toast_level_05"),
 ))]
@@ -27,7 +27,6 @@ mod level_02;
     not(feature = "toast_level_04"),
     not(feature = "toast_level_05"),
 ))]
-pub use level_01::*;
 
 #[cfg(all(
     feature = "toast_level_02",
