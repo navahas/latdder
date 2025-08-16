@@ -1,4 +1,4 @@
-//! # Toast — Level 05: Advanced State Management
+//! # Toast — Level 5: Advanced State Management
 //! GOAL: Implement complete toaster lifecycle with reset and multiple operation modes.
 //!
 //! ## ✅ Works

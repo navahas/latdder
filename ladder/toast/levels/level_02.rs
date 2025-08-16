@@ -20,12 +20,5 @@
 //!     .plug_in()
 //!     .toast(); // bread not inserted
 //! ```
-#[cfg_attr(docsrs, doc(cfg(feature = "toast_level_02")))]
-use crate::toast::api::*;
 
-pub fn target() {
-    let _ = Toaster::<Unplugged, NoBread>::new()
-        .plug_in()
-        .insert_bread()
-        .toast();
-}
+#![cfg(feature = "toast_level_02")]

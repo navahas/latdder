@@ -1,4 +1,4 @@
-//! # Toast — Level 03: Trait-Gated Timer
+//! # Toast — Level 3: Trait-Gated Timer
 //! GOAL: Add timer setting that only works when plugged in using trait capability gating.
 //!
 //! ## ✅ Works
@@ -18,6 +18,4 @@
 //!     .set_timer(10); // Cannot set timer while unplugged
 //! ```
 
-// #[cfg_attr(docsrs, doc(cfg(feature = "toast_level_03")))]
-//
 #![cfg(feature = "toast_level_03")]

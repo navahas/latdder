@@ -1,4 +1,4 @@
-//! # Toast — Level 01: Basic Typestate
+//! # Toast — Level 1: Basic Typestate
 //! GOAL: Prevent toasting when unplugged using compile-time state tracking.
 //!
 //! ## ✅ Works
@@ -16,9 +16,4 @@
 //!     .toast(); // Cannot toast while unplugged
 //! ```
 
-#[cfg_attr(docsrs, doc(cfg(feature = "toast_level_01")))]
-use crate::toast::api::*;
-
-pub fn target() {
-    let _ = Toaster::<Unplugged, NoBread>::new().plug_in().toast();
-}
+#![cfg(feature = "toast_level_01")]

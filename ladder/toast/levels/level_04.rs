@@ -1,4 +1,4 @@
-//! # Toast — Level 04: Toast Ejection
+//! # Toast — Level 4: Toast Ejection
 //! GOAL: Only allow ejecting after toasting by introducing a Toasted state.
 //!
 //! ## ✅ Works
