@@ -1,17 +1,17 @@
 #![doc = include_str!("../README.md")]
 
 //! # Complete Learning Guide
-//! 
+//!
 //! **New to Latdder?** Start with the **[Main Guide](https://github.com/navahas/latdder/blob/master/doc/MAIN_GUIDE.md)** for a complete overview.
 //!
 //! ## Quick Navigation
-//! 
+//!
 //! - **[Core Concepts](https://github.com/navahas/latdder/blob/master/doc/CONCEPTS.md)**: Essential theory (phantom types, typestate pattern, etc.)
 //! - **[Theme Guides](https://github.com/navahas/latdder/blob/master/doc/THEMES.md)**: Step-by-step implementation guides
 //! - **[Resources](https://github.com/navahas/latdder/blob/master/doc/RESOURCES.md)**: Additional learning materials
 //!
 //! ## Learning Themes
-//! 
+//!
 //! ### Init Theme (Start Here!)
 //! - **[Level 1](crate::init::levels::level_01)**: Introduction to typestate patterns
 //!
@@ -23,7 +23,7 @@
 //! - **[Level 5](crate::toast::levels::level_05)**: Advanced patterns and optimization
 //!
 //! ## Additional Resources
-//! 
+//!
 //! Explore additional learning materials in the [resources](crate::resources) module.
 
 //pub use self::resources::*;
@@ -39,7 +39,7 @@ pub mod resources {
     //!
     //! ## Complete Documentation
     //! For comprehensive guides, visit our [documentation directory](https://github.com/navahas/latdder/tree/master/doc).
-    
+
     pub mod trivia_rust_types {
         #![allow(rustdoc::bare_urls)]
         #![doc = include_str!("../doc/TRIVIA_RUST_TYPES.md")]
