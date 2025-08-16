@@ -7,6 +7,12 @@ pub struct Bread;
 
 pub struct Toaster<Power, Bread>(PhantomData<(Power, Bread)>);
 
+impl Default for Toaster<Unplugged, NoBread> {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl Toaster<Unplugged, NoBread> {
     pub fn new() -> Self {
         Toaster(PhantomData)

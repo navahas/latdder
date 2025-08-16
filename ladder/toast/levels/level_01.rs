@@ -3,17 +3,17 @@
 //!
 //! ## ✅ Works
 //! ```rust
-//! use ladder::toast::api::*;
+//! use latdder::toast::api::*;
 //! let _ = Toaster::<Unplugged, NoBread>::new()
 //!     .plug_in()
+//!     .insert_bread()
 //!     .toast();
 //! ```
 //!
 //! ## ❌ Fails to compile
 //! ```compile_fail
-//! use ladder::toast::api::*;
+//! use latdder::toast::api::*;
 //! let _ = Toaster::<Unplugged, NoBread>::new()
 //!     .toast(); // Cannot toast while unplugged
 //! ```
 
-#![cfg(feature = "toast_level_01")]

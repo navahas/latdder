@@ -1,17 +1,50 @@
-name: Formatter Verification
+name: Code Formatting
 
 on:
   push:
   pull_request:
 
 jobs:
-  rustfmt:
-    name: Rustfmt check
+  format-and-check:
+    name: Format and verify code
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: dtolnay/rust-toolchain@stable
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Rust
+        uses: dtolnay/rust-toolchain@stable
         with:
           components: rustfmt
-      - name: Check formatting
-        run: cargo fmt --all -- --check
+
+      - name: Format code
+        run: cargo fmt --all
+
+      - name: Check if formatting changed anything
+        id: verify-formatting
+        run: |
+          if git diff --quiet; then
+            echo "No formatting changes needed"
+            echo "changed=false" >> $GITHUB_OUTPUT
+          else
+            echo "Code was reformatted"
+            echo "changed=true" >> $GITHUB_OUTPUT
+            git diff --name-only
+          fi
+
+      - name: Commit formatting changes
+        if: steps.verify-formatting.outputs.changed == 'true' && github.event_name == 'push'
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add .
+          git commit -m "Auto-format code with rustfmt [skip ci]"
+          git push
+
+      - name: Fail if formatting needed (PR only)
+        if: steps.verify-formatting.outputs.changed == 'true' && github.event_name == 'pull_request'
+        run: |
+          echo "Code formatting is required. Please run 'cargo fmt --all' and commit the changes."
+          exit 1

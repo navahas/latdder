@@ -1,0 +1,97 @@
+name: Continuous Integration
+
+on:
+  push:
+    branches: ["master"]
+  pull_request:
+    branches: ["master"]
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  test:
+    name: Test Suite
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        rust: [stable, beta, nightly]
+        feature:
+          - "init_level_01"
+          - "toast_level_01"
+          - "toast_level_02"
+          - "toast_level_03"
+          - "toast_level_04"
+          - "toast_level_05"
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Rust ${{ matrix.rust }}
+        uses: dtolnay/rust-toolchain@master
+        with:
+          toolchain: ${{ matrix.rust }}
+
+      - name: Cache cargo registry
+        uses: actions/cache@v4
+        with:
+          path: ~/.cargo/registry
+          key: ${{ runner.os }}-cargo-registry-${{ hashFiles('**/Cargo.lock') }}
+
+      - name: Cache cargo index
+        uses: actions/cache@v4
+        with:
+          path: ~/.cargo/git
+          key: ${{ runner.os }}-cargo-index-${{ hashFiles('**/Cargo.lock') }}
+
+      - name: Test with feature ${{ matrix.feature }}
+        run: cargo test --features ${{ matrix.feature }}
+
+  lint:
+    name: Linting
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Rust
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          components: clippy
+
+      - name: Run clippy on library
+        run: cargo clippy --lib --all-features -- -D warnings
+
+      - name: Run clippy on binary
+        run: cargo clippy --bin latdder -- -D warnings
+
+  docs:
+    name: Documentation Check
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Rust
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Check documentation build
+        run: cargo doc --all-features --no-deps
+
+      - name: Check for broken links
+        run: cargo doc --all-features --no-deps 2>&1 | grep -q "warning:" && exit 1 || exit 0
+
+  minimum-rust-version:
+    name: Minimum Rust Version
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Rust 1.75 (minimum supported)
+        uses: dtolnay/rust-toolchain@master
+        with:
+          toolchain: "1.75"
+
+      - name: Check with minimum Rust version
+        run: cargo check --all-features

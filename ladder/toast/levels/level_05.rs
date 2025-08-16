@@ -3,7 +3,7 @@
 //!
 //! ## ✅ Works
 //! ```rust
-//! use ladder::toast::api::*;
+//! use latdder::toast::api::*;
 //! let _ = Toaster::<Unplugged, NoBread>::new()
 //!     .plug_in()
 //!     .insert_bread()
@@ -15,7 +15,7 @@
 //!
 //! ## ❌ Fails to compile
 //! ```compile_fail
-//! use ladder::toast::api::*;
+//! use latdder::toast::api::*;
 //! let _ = Toaster::<Unplugged, NoBread>::new()
 //!     .reset(); // Cannot reset from initial state
 //! ```

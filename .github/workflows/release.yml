@@ -1,0 +1,62 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  create-release:
+    name: Create Release
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Rust
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Build all features
+        run: cargo build --all-features --release
+
+      - name: Test all features
+        run: cargo test --all-features --release
+
+      - name: Generate documentation
+        run: cargo doc --all-features --no-deps
+
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          body: |
+            ## Changes in this Release
+            
+            See [CHANGELOG.md](CHANGELOG.md) for detailed changes.
+            
+            ## Documentation
+            
+            - [Online Documentation](https://navahas.github.io/latdder/)
+            - [Learning Guide](doc/MAIN_GUIDE.md)
+            - [Core Concepts](doc/CONCEPTS.md)
+            - [Theme Guides](doc/THEMES.md)
+            
+            ## Quick Start
+            
+            ```bash
+            # Clone the repository
+            git clone https://github.com/navahas/latdder.git
+            cd latdder
+            
+            # Start with the first level
+            cargo test --features toast_level_01
+            
+            # Generate local documentation
+            cargo doc --open
+            ```
+          draft: false
+          prerelease: false
